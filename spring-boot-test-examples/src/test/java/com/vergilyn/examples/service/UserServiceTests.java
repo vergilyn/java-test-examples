@@ -7,11 +7,12 @@ import com.vergilyn.examples.entity.UserEntity;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 
 @Slf4j
-@TestPropertySource("classpath:application-h2.yml")
+// @TestPropertySource("classpath:application-h2.yml")
 // @TestPropertySource("classpath:application-h2.properties")
+@ActiveProfiles("h2")
 public class UserServiceTests extends AbstractSpringBootTestApplicationTests {
     @Autowired
     private UserService testService;

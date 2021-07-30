@@ -65,6 +65,7 @@ public class ContextConfigurationTests{
 	}
 
 
+
 	public static class CustomService{
 
 		public String get(){

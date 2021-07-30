@@ -16,8 +16,13 @@ import org.springframework.test.context.TestPropertySource;
  *   （当然可以不用{@linkplain SpringApplication#setAdditionalProfiles(String...)}，而在application.properties中配置）
  *
  * <p>
- *   另外一种方式是：{@linkplain TestPropertySource}记载配置文件，但是貌似不支持`.yml`形式。
+ *   解决方式一：{@linkplain TestPropertySource}加载配置文件（更多的用于加载外部配置文件，而非 active-profile），但是貌似不支持`.yml`形式。
  *   <br/><b>2021-07-30，高版本的spring-boot-2.2.11.RELEASE，已经支持`.yml`</b>
+ * </p>
+ *
+ * <br/>
+ * <p>
+ *   解决方式二：{@linkplain org.springframework.test.context.ActiveProfiles}，（根据命名和该场景下）更推荐此写法。
  * </p>
  *
  * @author vergilyn
@@ -26,6 +31,7 @@ import org.springframework.test.context.TestPropertySource;
  */
 @SpringBootTest(classes = SpringBootTestApplication.class)
 // @TestPropertySource(locations = {"/application-{profile}.properties"})
+// @ActiveProfiles("{profile}")
 @Slf4j
 public abstract class AbstractSpringBootTestApplicationTests {
 

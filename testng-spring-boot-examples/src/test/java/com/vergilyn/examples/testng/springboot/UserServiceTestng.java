@@ -11,7 +11,7 @@ import com.vergilyn.examples.testng.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 /**
@@ -21,7 +21,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  * @see <a href="https://docs.spring.io/spring-boot/docs/2.2.11.RELEASE/reference/htmlsingle/#boot-features-testing">boot-features-testing</a>
  */
 @SpringBootTest(classes = TestngSpringBootApplication.class)
-@TestPropertySource("classpath:application-h2.properties")
+@ActiveProfiles("h2")
 @Slf4j
 public class UserServiceTestng extends AbstractTestNGSpringContextTests {
 
