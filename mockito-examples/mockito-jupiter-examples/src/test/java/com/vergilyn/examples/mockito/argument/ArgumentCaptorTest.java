@@ -1,4 +1,4 @@
-package com.vergilyn.examples.mockito;
+package com.vergilyn.examples.mockito.argument;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class ArgumentCaptorTest {
 
 	@Test
-	public void basic(){
+	public void capture(){
 		List<Integer> mockList = mock(List.class);
 
 		int arg = RandomUtils.nextInt();

@@ -1,4 +1,4 @@
-package com.vergilyn.examples.mockito;
+package com.vergilyn.examples.mockito.argument;
 
 import java.util.Map;
 

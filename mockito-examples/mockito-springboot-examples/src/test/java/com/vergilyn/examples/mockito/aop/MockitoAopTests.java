@@ -229,7 +229,11 @@ public class MockitoAopTests {
 			StringJoiner param = new StringJoiner("");
 			param.add(this.getClass().getSimpleName());
 
+			// 注意，spring项目中 一般都是面向接口（注入spring-bean），但是此处要mock的class是`实现类`，
+			// 假设 `AopSubServiceImpl implements AopSubService`，`AopSubService mockSub = mock(AopSubService.class`
+			// 导致："java.lang.ClassCastException: ...AopSubService$... cannot be cast to AopSubServiceImpl$..."
 			AopSubServiceImpl mockSub = mock(AopSubServiceImpl.class);
+
 			/**
 			 * {@link AopTestUtils#getTargetObject(Object)}
 			 * {@link AopTestUtils#getUltimateTargetObject(Object)}
