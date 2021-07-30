@@ -9,7 +9,6 @@
 
     <modules>
         <module>testng-examples</module>
-        <module>common-dependency</module>
         <module>jmh-examples</module>
         <module>swagger-examples</module>
         <module>spring-boot-test-examples</module>
@@ -35,6 +34,8 @@
         <google-guava.version>30.0-jre</google-guava.version>
         <alibaba-fastjson.version>1.2.62</alibaba-fastjson.version>
         <apache-common-lang3.version>3.9</apache-common-lang3.version>
+
+        <h2database.version>1.4.200</h2database.version>
 
         <apache-common-text.version>1.9</apache-common-text.version>
         <apache-common-io.version>2.6</apache-common-io.version>
@@ -75,6 +76,12 @@
                 <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2database.version}</version>
             </dependency>
 
             <dependency>
@@ -121,6 +128,12 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot-dependencies.version}</version>
                 <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
