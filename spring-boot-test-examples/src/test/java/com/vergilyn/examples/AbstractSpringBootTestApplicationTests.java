@@ -1,7 +1,11 @@
 package com.vergilyn.examples;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 
 /**
@@ -22,5 +26,27 @@ import org.springframework.test.context.TestPropertySource;
  */
 @SpringBootTest(classes = SpringBootTestApplication.class)
 // @TestPropertySource(locations = {"/application-{profile}.properties"})
+@Slf4j
 public abstract class AbstractSpringBootTestApplicationTests {
+
+	@Autowired
+	protected AnnotationConfigApplicationContext applicationContext;
+
+	protected <T> T getBean(Class<T> clazz){
+		try {
+			return applicationContext.getBean(clazz);
+		}catch (NoSuchBeanDefinitionException e){
+			log.error("NoSuchBeanDefinitionException >>>> {}", e.getMessage());
+			return null;
+		}
+	}
+
+	protected Object getBean(String beanName){
+		try {
+			return applicationContext.getBean(beanName);
+		}catch (NoSuchBeanDefinitionException e){
+			log.error("NoSuchBeanDefinitionException >>>> {}", e.getMessage());
+			return null;
+		}
+	}
 }
