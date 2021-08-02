@@ -38,3 +38,23 @@ public void openBrowser(@Optional("chrome")String browser){
 
 2. IDEA 中可以不定义xml，而是通过`Create Run Configuration`中指定 group （但貌似只能做到很简单 group，没有xml功能强大）  
 ![testng-idea-choose-group.png](./docs/images/testng-idea-choose-group.png)
+
+
+##
+### Testng Native Dependency Injection
+- <https://testng.org/doc/documentation-main.html#native-dependency-injection>
+
+| Annotation    | ITestContext | XmlTest | Method | Object[] | ITestResult |
+|:--------------|:-------------|:--------|:-------|:---------|:------------|
+| @BeforeSuite  | Yes          |         |        |          |             |
+| @BeforeTest   | Yes          | Yes     |        |          |             |
+| @BeforeGroups | Yes          | Yes     |        |          |             |
+| @BeforeClass  | Yes          | Yes     |        |          |             |
+| @BeforeMethod | Yes          | Yes     | Yes    | Yes      | Yes         |
+| @Test         | Yes          |         |        |          |             |
+| @DataProvider | Yes          |         | Yes    |          |             |
+| @AfterMethod  | Yes          | Yes     | Yes    | Yes      | Yes         |
+| @AfterClass   | Yes          | Yes     |        |          |             |
+| @AfterGroups  | Yes          | Yes     |        |          |             |
+| @AfterTest    | Yes          | Yes     |        |          |             |
+| @AfterSuite   | Yes          |         |        |          |             |
