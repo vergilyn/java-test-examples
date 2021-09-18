@@ -1,7 +1,7 @@
 package com.vergilyn.examples.mockito.normal;
 
+import com.vergilyn.examples.mockito.AbstractMockitoSpringBootTests;
 import com.vergilyn.examples.mockito.AbstractSleepPrint;
-import com.vergilyn.examples.mockito.MockitoApplication;
 import com.vergilyn.examples.mockito.service.LoginService;
 import com.vergilyn.examples.mockito.simulate.SlowService;
 import com.vergilyn.examples.mockito.simulate.TestNotDependencyService;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * 通过 lazy，避免不需要的bean提前创建(e.g. {@linkplain TestNotDependencyService})，导致启动过慢。
@@ -25,9 +25,9 @@ import org.springframework.context.ApplicationContext;
  *
  * @see NormalSpringbootTest
  */
-@SpringBootTest(classes = MockitoApplication.class,
-	properties = "spring.main.lazy-initialization=true")
-public class LazySpringbootTest {
+// @SpringBootTest(classes = MockitoApplication.class, properties = "spring.main.lazy-initialization=true")
+@TestPropertySource(properties = "spring.main.lazy-initialization=true")
+public class LazySpringbootTest extends AbstractMockitoSpringBootTests {
 	static {
 		AbstractSleepPrint.slow_service = 10;
 		AbstractSleepPrint.login_service = 10;

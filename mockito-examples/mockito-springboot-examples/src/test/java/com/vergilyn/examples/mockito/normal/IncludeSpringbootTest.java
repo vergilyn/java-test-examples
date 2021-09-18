@@ -1,14 +1,13 @@
 package com.vergilyn.examples.mockito.normal;
 
+import com.vergilyn.examples.mockito.AbstractMockitoSpringBootTests;
 import com.vergilyn.examples.mockito.AbstractSleepPrint;
-import com.vergilyn.examples.mockito.MockitoApplication;
 import com.vergilyn.examples.mockito.service.LoginService;
 import com.vergilyn.examples.mockito.simulate.TestNotDependencyService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
@@ -25,13 +24,12 @@ import org.springframework.context.annotation.FilterType;
  * @author vergilyn
  * @since 2021-02-05
  */
-@SpringBootTest(classes = MockitoApplication.class)
 /* 无效的 `@ComponentScan` 配置。
  * （即使是启动类）也不能 exclude TestNotDependencyService.class，因为LoginService中存在依赖且lazy-init=false。
  */
 @ComponentScan(
 		excludeFilters = {@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = TestNotDependencyService.class)})
-public class IncludeSpringbootTest {
+public class IncludeSpringbootTest extends AbstractMockitoSpringBootTests {
 
 	static {
 		AbstractSleepPrint.slow_service = 10;

@@ -1,14 +1,13 @@
 package com.vergilyn.examples.mockito.normal;
 
+import com.vergilyn.examples.mockito.AbstractMockitoSpringBootTests;
 import com.vergilyn.examples.mockito.AbstractSleepPrint;
-import com.vergilyn.examples.mockito.MockitoApplication;
 import com.vergilyn.examples.mockito.rpc.RpcService;
 import com.vergilyn.examples.mockito.service.LoginService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * 默认会完整的加载spring-boot，导致启动很慢<br/>
@@ -21,8 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  *
  * @see LazySpringbootTest
  */
-@SpringBootTest(classes = MockitoApplication.class)
-public class NormalSpringbootTest {
+public class NormalSpringbootTest extends AbstractMockitoSpringBootTests {
 	static {
 		AbstractSleepPrint.slow_service = 10;
 		AbstractSleepPrint.login_service = 10;

@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.ReflectionUtils;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,9 +34,8 @@ import static org.mockito.Mockito.times;
  *
  * @see <a href="https://www.cnblogs.com/zhuang229/p/12237269.html">单元测试中简单使用Mockito解决Spring Bean依赖树问题</a>
  */
-@SpringBootTest(classes = MockitoApplication.class,
-		properties = "spring.main.lazy-initialization=true")
-public class MockitoSpringBootTest {
+@TestPropertySource(properties = "spring.main.lazy-initialization=true")
+public class MockitoSpringBootTest extends AbstractMockitoSpringBootTests{
 
 	static {
 		AbstractSleepPrint.slow_service = 1;
