@@ -38,14 +38,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  *
  * <p>根据测试情况的个人理解 {@linkplain TestConfiguration}：<br/>
  *   1. 测试类中 的静态内部类如果被`{@linkplain TestConfiguration}`修饰，则可以被 registered-automatically。 <br/>
- *   2. 即使是相同package下的class (eg. {@linkplain OuterTestConfiguration})，无法被 auto-registry。
+ *   2. 即使是相同package下的class (eg. {@linkplain OuterClassTestConfiguration})，无法被 auto-registry。
  *     则可以满足 “单元测试中按需注入bean”。<br/>
  *   3. 如果全部用 inner-class 可能代码很难看，所以可以结合 {@linkplain ContextConfiguration} 和 {@linkplain Import} 按需依赖。<br/>
  *   4. {@linkplain ContextConfiguration} 和 {@linkplain Import} 表现上的区别
  *   <pre>
  *   `@ContextConfiguration(classes)`:
- *     会导致`InnerTestConfiguration`没有被 registered。(eg. `inner == null`)
- *     解决：在`InnerTestConfiguration`中添加 {@linkplain ComponentScan}
+ *     会导致{@linkplain InnerClassTestConfiguration}没有被 registered。(eg. `inner == null`)
+ *     解决：在{@linkplain OuterClassTestConfiguration}`中添加 {@linkplain ComponentScan}
  *
  *   `@Import(...)`:
  *     inner: 如果用`@TestConfiguration`或`@Configuration`注释的类是 **测试类中的静态嵌套类**，则它将被 registered-automatically。
@@ -61,27 +61,37 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author vergilyn
  * @since 2021-09-30
  *
- * @see OuterTestConfiguration
+ * @see OuterClassTestConfiguration
  * @see <a href="https://docs.spring.io/spring-boot/docs/2.2.11.RELEASE/reference/htmlsingle/#boot-features-testing-spring-boot-applications-excluding-config">2.1.1.RELEASE, Excluding Test Configuration</a>
  * @see <a href="https://docs.spring.io/spring-boot/docs/1.5.1.RELEASE/reference/htmlsingle/#boot-features-testing-spring-boot-applications-excluding-config">1.5.1.RELEASE, Excluding test configuration</a>
+ * @see com.vergilyn.examples.context.testcomponent.TestComponentTests
  */
 @SpringBootTest
-// @ContextConfiguration(classes = OuterTestConfiguration.class)
-// @Import(OuterTestConfiguration.class)
+// @ContextConfiguration(classes = OuterClassTestConfiguration.class)
+// @Import(OuterClassTestConfiguration.class)
 public class TestConfigurationTests {
 
 	@Autowired(required = false)
-	@Qualifier("inner")
-	private String inner;
+	@Qualifier("innerClass")
+	private String innerClass;
 
 	@Autowired(required = false)
-	@Qualifier("outer")
-	private String outer;
+	@Qualifier("outerClass")
+	private String outerClass;
+
+	@TestConfiguration
+	static class InnerClassTestConfiguration {
+
+		@Bean("innerClass")
+		public String inner(){
+			return InnerClassTestConfiguration.class.getName();
+		}
+	}
 
 	@Test
 	public void test(){
-		System.out.println("inner >>>> " + inner);
-		System.out.println("outer >>>> " + outer);
+		System.out.println("inner-class >>>> " + innerClass);
+		System.out.println("outer-class >>>> " + outerClass);
 
 		Class<?> thisClass = this.getClass();
 		ContextConfiguration contextConfiguration;
@@ -97,34 +107,30 @@ public class TestConfigurationTests {
 
 		if (contextConfiguration == null){
 			if (imp == null){
-				System.out.println("`contextConfiguration == null` && `imp == null` >>>> expected, `inner != null`, `outer == null`");
-				assertNotNull(inner);
-				assertNull(outer);
+				System.out.println("`contextConfiguration == null` && `imp == null` >>>> "
+						                   + "expected, `inner-class != null`, `outer-class == null`");
+				assertNotNull(innerClass);
+				assertNull(outerClass);
 			}else {
-				System.out.println("`contextConfiguration == null` && `imp != null` >>>> expected, `inner != null`, `outer != null`");
-				assertNotNull(inner);
-				assertNotNull(outer);
+				System.out.println("`contextConfiguration == null` && `imp != null` >>>> "
+						                   + "expected, `inner-class != null`, `outer-class != null`");
+				assertNotNull(innerClass);
+				assertNotNull(outerClass);
 			}
 			return;
 		}
 
 		if (componentScan == null){
-			System.out.println("`contextConfiguration != null` && `componentScan == null` >>>> expected, `inner == null`, `outer != null`");
-			assertNull(inner);
-			assertNotNull(outer);
+			System.out.println("`contextConfiguration != null` && `componentScan == null` >>>> "
+					                   + "expected, `inner-class == null`, `outer-class != null`");
+			assertNull(innerClass);
+			assertNotNull(outerClass);
 		}else {
-			System.out.println("`contextConfiguration != null` && `componentScan != null` >>>> expected, `inner != null`, `outer != null`");
-			assertNotNull(inner);
-			assertNotNull(outer);
+			System.out.println("`contextConfiguration != null` && `componentScan != null` >>>> "
+					                   + "expected, `inner-class != null`, `outer-class != null`");
+			assertNotNull(innerClass);
+			assertNotNull(outerClass);
 		}
 	}
 
-	@TestConfiguration
-	static class InnerTestConfiguration {
-
-		@Bean("inner")
-		public String inner(){
-			return InnerTestConfiguration.class.getName();
-		}
-	}
 }
