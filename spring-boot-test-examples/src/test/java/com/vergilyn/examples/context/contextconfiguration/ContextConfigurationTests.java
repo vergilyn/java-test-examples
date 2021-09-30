@@ -1,4 +1,4 @@
-package com.vergilyn.examples.context;
+package com.vergilyn.examples.context.contextconfiguration;
 
 import com.vergilyn.examples.AbstractSpringBootTestApplicationTests;
 import com.vergilyn.examples.service.UserService;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ContextConfigurationTests{
 
 	@ContextConfiguration(classes = CustomContextConfiguration.class)
-	@Import(ContextConfigurationTests.CustomService.class)
+	@Import({ContextConfigurationTests.CustomService.class})
 	@Nested
 	public static class CustomContextConfigurationTests extends AbstractSpringBootTestApplicationTests {
 		@Test
