@@ -13,7 +13,7 @@ public class SpringBootTestApplication {
 
 	public static void main(String[] args) {
 		SpringApplication application = new SpringApplication(SpringBootTestApplication.class);
-		application.setAdditionalProfiles("h2");
+		// application.setAdditionalProfiles("h2");
 		application.run(args);
 	}
 }

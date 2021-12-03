@@ -5,7 +5,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 
 
@@ -30,14 +30,14 @@ import org.springframework.test.context.TestPropertySource;
  * @date 2020-04-27
  * @see <a href="https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#boot-features-testing">boot-features-testing</a>
  */
-@SpringBootTest(classes = SpringBootTestApplication.class)
+@SpringBootTest(classes = SpringBootTestApplication.class /* ,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT */)
 // @TestPropertySource(locations = {"/application-{profile}.properties"})
 // @ActiveProfiles("{profile}")
 @Slf4j
 public abstract class AbstractSpringBootTestApplicationTests {
 
 	@Autowired
-	protected AnnotationConfigApplicationContext applicationContext;
+	protected ApplicationContext applicationContext;
 
 	protected <T> T getBean(Class<T> clazz){
 		try {

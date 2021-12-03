@@ -2,4 +2,4 @@ spring:
   datasource:
     platform: h2
     schema:
-      - schema.sql
+      - classpath*:schema.sql

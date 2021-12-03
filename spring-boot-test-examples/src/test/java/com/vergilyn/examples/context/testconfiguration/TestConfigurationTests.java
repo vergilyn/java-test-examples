@@ -1,5 +1,6 @@
 package com.vergilyn.examples.context.testconfiguration;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,9 +39,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  *
  * <p>根据测试情况的个人理解 {@linkplain TestConfiguration}：<br/>
  *   1. 测试类中 的静态内部类如果被`{@linkplain TestConfiguration}`修饰，则可以被 registered-automatically。 <br/>
+ *
  *   2. 即使是相同package下的class (eg. {@linkplain OuterClassTestConfiguration})，无法被 auto-registry。
  *     则可以满足 “单元测试中按需注入bean”。<br/>
+ *
  *   3. 如果全部用 inner-class 可能代码很难看，所以可以结合 {@linkplain ContextConfiguration} 和 {@linkplain Import} 按需依赖。<br/>
+ *
  *   4. {@linkplain ContextConfiguration} 和 {@linkplain Import} 表现上的区别
  *   <pre>
  *   `@ContextConfiguration(classes)`:
@@ -54,19 +58,29 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  *    结论：
  *      `@ContextConfiguration`更多的是用来决定如何 加载和配置 ApplicationContext
  *   </pre>
- *
  * </p>
  *
+ * <p>
+ *    又双叒叕懵逼了....
+ *    如果通过`@SpringBootTest(classes = SpringBootTestApplication.class)` 会导致 inner-class 的 `@TestConfiguration`无效。
+ *    可以是`@SpringBootTest()` 或 `@ContextConfiguration(...)`
+ *
+ * </p>
  *
  * @author vergilyn
  * @since 2021-09-30
  *
+ * @see TestConfiguration
  * @see OuterClassTestConfiguration
  * @see <a href="https://docs.spring.io/spring-boot/docs/2.2.11.RELEASE/reference/htmlsingle/#boot-features-testing-spring-boot-applications-excluding-config">2.1.1.RELEASE, Excluding Test Configuration</a>
  * @see <a href="https://docs.spring.io/spring-boot/docs/1.5.1.RELEASE/reference/htmlsingle/#boot-features-testing-spring-boot-applications-excluding-config">1.5.1.RELEASE, Excluding test configuration</a>
  * @see com.vergilyn.examples.context.testcomponent.TestComponentTests
  */
-@SpringBootTest
+// @SpringBootTest
+
+@SpringBootTest(classes = com.vergilyn.examples.SpringBootTestApplication.class)
+@ContextConfiguration(classes = TestConfigurationTests.InnerClassTestConfiguration.class)
+
 // @ContextConfiguration(classes = OuterClassTestConfiguration.class)
 // @Import(OuterClassTestConfiguration.class)
 public class TestConfigurationTests {
@@ -105,7 +119,7 @@ public class TestConfigurationTests {
 		}
 		imp = AnnotationUtils.findAnnotation(thisClass, Import.class);
 
-		if (contextConfiguration == null){
+		if (contextConfiguration == null || !ArrayUtils.contains(contextConfiguration.classes(), OuterClassTestConfiguration.class)){
 			if (imp == null){
 				System.out.println("`contextConfiguration == null` && `imp == null` >>>> "
 						                   + "expected, `inner-class != null`, `outer-class == null`");

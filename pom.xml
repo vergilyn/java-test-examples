@@ -60,6 +60,8 @@
         <hamcrest.version>2.2</hamcrest.version>
         <assertj.version>3.19.0</assertj.version>
 
+        <awaitility.version>4.1.0</awaitility.version>
+
         <!-- maven-plugins http://maven.apache.org/plugins/index.html -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -239,6 +241,12 @@
             <version>${alibaba-fastjson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

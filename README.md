@@ -20,3 +20,17 @@
 ## testcontainers
 - [testcontainers.org](https://www.testcontainers.org/)
 - [testcontainers](https://github.com/testcontainers)
+
+## awaitility
+- <https://github.com/awaitility/awaitility>
+
+junit异步测试时，现在是用`Thread.sleep(...)`或`CountDownLatch`的方式阻止测试方法退出。
+`awaitility`相对可能更友好一点。
+```java
+Awaitility.await().atMost(1, TimeUnit.MINUTES)
+        .untilAsserted(() -> Assertions.assertEquals(msgSize, msgCounter.get()));
+```
+
+see:  
+- Junit单元测试多线程的问题：<https://www.cnblogs.com/yanphet/p/5774291.html>
+- How to use JUnit to test asynchronous processes: <https://stackoverflow.com/questions/631598/how-to-use-junit-to-test-asynchronous-processes>
