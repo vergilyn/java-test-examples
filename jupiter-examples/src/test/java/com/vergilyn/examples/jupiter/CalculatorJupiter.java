@@ -33,6 +33,7 @@ public class CalculatorJupiter {
         assertEquals(3, calculator.add(1, 1), "1 + 1 should equal 2");
     }
 
+    // @Test  // "No ParameterResolver registered for parameter [int arg0] in method..."
     @ParameterizedTest(name = "{0} + {1} = {2}")
     @CsvSource({
             "0,    1,   1",

@@ -1,0 +1,4 @@
+[
+  [{"type": "first-object"}, [{"type": "second-array", "index": 1}, {"type": "second-array", "index": 1}]],
+  [{"type": "first-object-02"}, [{"type": "second-array-02", "index": 1}, {"type": "second-array-02", "index": 1}]]
+]

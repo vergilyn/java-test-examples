@@ -52,7 +52,7 @@
 
         <testng.version>7.1.0</testng.version>
         <junit.version>4.13.1</junit.version>
-        <jupiter.version>5.7.0</jupiter.version>
+        <jupiter.version>5.8.2</jupiter.version>
 
         <testcontainers.version>1.15.0</testcontainers.version>
         <jna.version>5.5.0</jna.version>
@@ -72,12 +72,33 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- junit5
+            2022-02-14，`spring-boot-dependencies`依赖`junit-bom -> junit-jupiter.version: 5.5.2`
+            貌似`type=pom，scope=import`的 exclusion写法无效（不是很理解...）
+            但是，根据 maven的依赖关系，如果 自身项目先定义`junit-bom:5.8.2`，那么会优先于`spring-boot-dependencies`
+            -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+
+                <!-- 2022-02-14，貌似这么写无效 -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit</groupId>
+                        <artifactId>junit-bom</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -135,6 +156,10 @@
                         <groupId>org.junit.vintage</groupId>
                         <artifactId>junit-vintage-engine</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
 
@@ -153,14 +178,7 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- junit5 -->
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${jupiter.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+
 
             <!-- testcontainers -->
             <dependency>
