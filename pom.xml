@@ -9,7 +9,6 @@
 
     <modules>
         <module>testng-examples</module>
-        <module>jmh-examples</module>
         <module>swagger-examples</module>
         <module>spring-boot-test-examples</module>
         <module>testng-spring-boot-examples</module>
