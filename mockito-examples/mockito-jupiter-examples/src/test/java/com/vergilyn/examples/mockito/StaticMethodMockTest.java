@@ -22,27 +22,31 @@ import static org.mockito.ArgumentMatchers.eq;
  */
 public class StaticMethodMockTest {
 
+	/**
+	 * mock的静态方法:
+	 * <p> 1. <b>只在当前线程有效</b>
+	 * <p> 2. 如果closed，也会让mock-static失效。
+	 */
 	@Test
 	public void mockStaticMethod() {
 		Integer[] arrays = {1, 2};
 
 		MockedStatic<StringUtils> mockStatic = Mockito.mockStatic(StringUtils.class);
-
 		mockStatic.when(() -> {
 			// 不能使用 org.mockito.ArgumentMatchers#...()
 			StringUtils.join(eq(arrays), anyString());
 		}).thenReturn("3");
 
-		String expected = StringUtils.join(arrays, "anyString()");
-		System.out.println(" >>>> " + expected);
+		String actual = StringUtils.join(arrays, "anyString()");
+		System.out.println("actual >>>> " + actual);
 
-		Assertions.assertEquals("3", expected);
+		Assertions.assertEquals("3", actual);
 
 		/*
 		 * The returned object's `MockedStatic.close()` method must be called
 		 * upon completing the test or the mock will remain active on the current thread.
 		 */
-		mockStatic.close();
+		// mockStatic.close();
 	}
 
 	/**

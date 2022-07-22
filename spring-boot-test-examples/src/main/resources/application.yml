@@ -4,4 +4,6 @@ spring:
 
   profiles:
     active:
-      - h2
+      - datasource
+      - mybatis
+      - redis

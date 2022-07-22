@@ -1,33 +1,44 @@
 package com.vergilyn.examples.service;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vergilyn.examples.entity.UserEntity;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.vergilyn.examples.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
- * @author VergiLyn
- * @blog http://www.cnblogs.com/VergiLyn/
- * @date 2018/4/16
+ *
+ * @author vergilyn
+ * @since 2022-06-10
  */
 @Service
-public class UserService {
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
-    public int save(String username){
-        return jdbcTemplate.update("insert into test_user(username) values(?) ", username);
+    public UserEntity save(String username){
+        UserEntity entity = new UserEntity();
+        entity.setId(null);
+        entity.setUsername(username);
+        entity.setCreateTime(LocalDateTime.now());
+
+        save(entity);
+
+        return entity;
     }
 
     public int delete(String username){
-        return jdbcTemplate.update("delete from test_user where username = ?", username);
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(UserEntity::getUsername, username);
+
+        return getBaseMapper().delete(queryWrapper);
     }
 
     public List<UserEntity> get(String username){
-        return jdbcTemplate.query("select * from test_user where username = ?", new Object[]{username}, BeanPropertyRowMapper.newInstance(UserEntity.class));
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(UserEntity::getUsername, username);
+
+        return getBaseMapper().selectList(queryWrapper);
     }
 }
