@@ -19,6 +19,7 @@
         <module>mockito-examples</module>
         <module>assert-examples</module>
         <module>spring-boot-test-slice-examples</module>
+        <module>log-captor-examples</module>
     </modules>
 
     <properties>
@@ -58,6 +59,8 @@
 
         <hamcrest.version>2.2</hamcrest.version>
         <assertj.version>3.19.0</assertj.version>
+
+        <log-captor.version>2.7.10</log-captor.version>
 
         <awaitility.version>4.1.0</awaitility.version>
 
@@ -219,6 +222,13 @@
                 <version>${assertj.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.hakky54</groupId>
+                <artifactId>logcaptor</artifactId>
+                <version>${log-captor.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -264,6 +274,7 @@
             <version>${awaitility.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
