@@ -1,22 +1,16 @@
 package com.vergilyn.examples.mockito;
 
-import java.util.List;
-
 import com.sun.org.glassfish.gmbal.Description;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -45,7 +39,7 @@ public class VerifyTest {
 	public void basic(){
 		List<Integer> mockList = mock(List.class);
 
-		// 第1次调用 get(0) 返回`1`，第1次调用 get(0) 返回`2`。依次类推
+		// 第1次调用 get(0) 返回`1`，第2次调用 get(0) 返回`2`。依次类推
 		Mockito.when(mockList.get(0)).thenReturn(1).thenReturn(2);
 		assertEquals(1, mockList.get(0));
 		assertEquals(2, mockList.get(0));

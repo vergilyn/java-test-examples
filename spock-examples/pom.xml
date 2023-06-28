@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.vergilyn.examples</groupId>
+        <artifactId>java-test-examples</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>spock-examples</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>spock-usage-examples</module>
+    </modules>
+
+    <properties>
+        <spock.version>2.4-M1-groovy-4.0</spock.version>
+        <groovy-sql.version>4.0.12</groovy-sql.version>
+        <h2.version>2.1.214</h2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-bom</artifactId>
+                <version>${spock.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- 使用spock需要的依赖可以参考：https://github.com/spockframework/spock-example -->
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-junit4</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- optional dependencies for using Spock -->
+
+        <!-- dependencies used by examples in this project -->
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-sql</artifactId>
+            <version>${groovy-sql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

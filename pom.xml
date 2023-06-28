@@ -20,6 +20,7 @@
         <module>assert-examples</module>
         <module>spring-boot-test-slice-examples</module>
         <module>log-captor-examples</module>
+        <module>spock-examples</module>
     </modules>
 
     <properties>

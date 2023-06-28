@@ -32,6 +32,7 @@ public class SpyStubMethodTests {
 		// mockito 认为上一行中才是 invocations，所以总共 invocations `spy.print(1)` 1次（不是2次）
 		Mockito.verify(spy, times(1)).print(1);
 
+		Mockito.verify()
 	}
 
 	private static class TestObject {
