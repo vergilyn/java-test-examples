@@ -1,5 +1,5 @@
 package com.vergilyn.examples.slicetest.data.redis;
 
-//@SpringBootApplication
+// @SpringBootApplication
 public class RedisSliceTestApplication {
 }

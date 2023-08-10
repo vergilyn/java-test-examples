@@ -1,14 +1,21 @@
 package com.vergilyn.examples.slicetest.data.redis;
 
-import javax.annotation.Resource;
-
+import com.vergilyn.examples.slicetest.data.UnexpectedService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.ContextConfiguration;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -29,20 +36,42 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  *          github, `@DataRedisTest` examples</a>
  */
 @DataRedisTest
-// 还是需要“RedisSliceTestApplication.class”
-//@ContextConfiguration(classes = RedisSliceTestApplication.class)
+// @ContextConfiguration(classes = RedisSliceTests.RedisSliceTestConfiguration.class)
 public class RedisSliceTests {
 
-	@Resource
+	@Autowired(required = false)
 	ApplicationContext applicationContext;
-
-	// 需要依赖`spring-data-redis.jar`
-	@Resource
+	@Autowired(required = false)
 	StringRedisTemplate stringRedisTemplate;
+	@Autowired(required = false)
+	UnexpectedService unexpectedService;
 
+	/**
+	 * 1. 如果只使用{@link DataRedisTest @DataRedisTest}，且可扫描package下<b>不包含</b> {@link SpringBootConfiguration}时：
+	 * <pre>
+	 *   java.lang.IllegalStateException:
+	 *     Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
+	 * </pre>
+	 *
+	 * <p> 解决方式1：package下增加 例如{@link RedisSliceTestApplication}（且被 {@link SpringBootApplication} 注释）。
+	 * <p> 解决方式2：通过 {@link ContextConfiguration} 指定 非package目录下的 {@code XxxApplication}。
+	 * <p> 解决方式3：使用 嵌套的{@link TestConfiguration} 指定 {@link SpringBootConfiguration} 、{@link EnableAutoConfiguration}等注解。
+	 */
 	@Test
 	public void test(){
-		System.out.println("applicationContext >>>> " + applicationContext);
-		System.out.println("stringRedisTemplate >>>> " + stringRedisTemplate);
+		assertThat(applicationContext).isNotNull();
+		assertThat(stringRedisTemplate).isNotNull();
+		assertThat(unexpectedService).isNull();
+	}
+
+	/**
+	 * {@link SpringBootApplication} = {@link SpringBootConfiguration} + {@link EnableAutoConfiguration}
+	 */
+	@TestConfiguration
+	@SpringBootConfiguration
+	@EnableAutoConfiguration
+	// @AutoConfigurationPackage(basePackages = "com.vergilyn.examples.slicetest.data")
+	static class RedisSliceTestConfiguration {
+
 	}
 }

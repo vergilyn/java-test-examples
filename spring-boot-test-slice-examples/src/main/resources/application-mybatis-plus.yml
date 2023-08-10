@@ -1,0 +1,2 @@
+mybatis-plus:
+  type-aliases-package: com.vergilyn.examples.slicetest.entity,com.vergilyn.examples.slicetest.mapper

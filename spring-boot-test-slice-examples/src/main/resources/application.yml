@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: spring-boot-test-slice-examples
+
+  profiles:
+    active:
+      - h2
+      - mybatis-plus
+      - redis
+#  config:
+#    activate:
+#      on-profile:
+#        - h2
+#        - mybatis-plus
+#        - redis

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vergilyn.examples.entity.UserEntity;
 import com.vergilyn.examples.mapper.UserMapper;
-import org.springframework.stereotype.Service;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,8 +14,15 @@ import java.util.List;
  * @author vergilyn
  * @since 2022-06-10
  */
-@Service
 public class UserService extends ServiceImpl<UserMapper, UserEntity> {
+    public static final String BEAN_NAME = "userService";
+
+    @Getter
+    private final String beanName;
+
+    public UserService(String beanName) {
+        this.beanName = beanName;
+    }
 
     public UserEntity save(String username){
         UserEntity entity = new UserEntity();
