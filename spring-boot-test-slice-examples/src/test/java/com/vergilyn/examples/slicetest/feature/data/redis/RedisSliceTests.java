@@ -1,6 +1,6 @@
-package com.vergilyn.examples.slicetest.data.redis;
+package com.vergilyn.examples.slicetest.feature.data.redis;
 
-import com.vergilyn.examples.slicetest.data.UnexpectedService;
+import com.vergilyn.examples.slicetest.feature.data.UnexpectedService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;

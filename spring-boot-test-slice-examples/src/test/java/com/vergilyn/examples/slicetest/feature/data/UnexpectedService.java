@@ -1,4 +1,4 @@
-package com.vergilyn.examples.slicetest.data;
+package com.vergilyn.examples.slicetest.feature.data;
 
 import org.springframework.stereotype.Service;
 

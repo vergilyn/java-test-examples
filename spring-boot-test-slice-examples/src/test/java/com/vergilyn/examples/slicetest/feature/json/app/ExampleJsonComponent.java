@@ -1,6 +1,4 @@
-package com.vergilyn.examples.slicetest.json.app;
-
-import java.io.IOException;
+package com.vergilyn.examples.slicetest.feature.json.app;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -8,11 +6,12 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
+
+import java.io.IOException;
 
 /**
  * Example {@link JsonComponent @JsonComponent} for use with {@link JsonTest @JsonTest}

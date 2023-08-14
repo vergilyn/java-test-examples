@@ -1,4 +1,4 @@
-package com.vergilyn.examples.slicetest.json.app;
+package com.vergilyn.examples.slicetest.feature.json.app;
 
 /**
  * Example object to read/write as JSON.

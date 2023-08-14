@@ -13,7 +13,6 @@
     <artifactId>spring-boot-test-examples</artifactId>
 
     <properties>
-        <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <alibaba-druid.version>1.2.4</alibaba-druid.version>
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
     </properties>

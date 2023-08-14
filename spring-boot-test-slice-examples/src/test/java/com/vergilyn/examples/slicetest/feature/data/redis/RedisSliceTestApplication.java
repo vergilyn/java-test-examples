@@ -1,4 +1,4 @@
-package com.vergilyn.examples.slicetest.data.redis;
+package com.vergilyn.examples.slicetest.feature.data.redis;
 
 // @SpringBootApplication
 public class RedisSliceTestApplication {

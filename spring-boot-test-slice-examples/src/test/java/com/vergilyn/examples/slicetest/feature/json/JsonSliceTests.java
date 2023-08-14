@@ -1,17 +1,12 @@
-package com.vergilyn.examples.slicetest.json;
+package com.vergilyn.examples.slicetest.feature.json;
 
-import com.vergilyn.examples.slicetest.json.app.ExampleBasicObject;
-import com.vergilyn.examples.slicetest.json.app.ExampleCustomObject;
-import com.vergilyn.examples.slicetest.json.app.ExampleJsonObjectWithView;
-
+import com.vergilyn.examples.slicetest.feature.json.app.ExampleBasicObject;
+import com.vergilyn.examples.slicetest.feature.json.app.ExampleCustomObject;
+import com.vergilyn.examples.slicetest.feature.json.app.ExampleJsonObjectWithView;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
-import org.springframework.boot.test.json.BasicJsonTester;
-import org.springframework.boot.test.json.GsonTester;
-import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.boot.test.json.JsonContent;
-import org.springframework.boot.test.json.JsonbTester;
+import org.springframework.boot.test.json.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 

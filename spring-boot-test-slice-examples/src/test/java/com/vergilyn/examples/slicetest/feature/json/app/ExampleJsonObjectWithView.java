@@ -1,7 +1,6 @@
-package com.vergilyn.examples.slicetest.json.app;
+package com.vergilyn.examples.slicetest.feature.json.app;
 
 import com.fasterxml.jackson.annotation.JsonView;
-
 import org.springframework.util.ObjectUtils;
 
 /**

@@ -1,4 +1,4 @@
-package com.vergilyn.examples.slicetest.json.app;
+package com.vergilyn.examples.slicetest.feature.json.app;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration;
