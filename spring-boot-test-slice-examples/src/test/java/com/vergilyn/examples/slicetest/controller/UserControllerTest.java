@@ -1,6 +1,7 @@
 package com.vergilyn.examples.slicetest.controller;
 
 import com.vergilyn.examples.slicetest.SliceTestApplication;
+import com.vergilyn.examples.slicetest.controller.core.AdditionalExcludeFilterContextCustomizerFactory;
 import com.vergilyn.examples.slicetest.controller.core.FilterBeanDefinitionRegistryPostProcessor;
 import com.vergilyn.examples.slicetest.controller.core.UserOtherControllerTypeExcludeFilter;
 import com.vergilyn.examples.slicetest.user.UserOtherService;
@@ -51,7 +52,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p> 1）无法通过在 单元测试类中增加 {@link ComponentScan#excludeFilters()} 进行排除。
  * <br/> 因为，多个 {@link ComponentScan} 之间是相互独立执行的。
  *
- * <p> 2）
+ * <p> 2）无法通过 添加 default-excludeFilters 达到目的。参考 {@link AdditionalExcludeFilterContextCustomizerFactory}
  *
  * <p> 3）<b>可行方案</b>，参考{@link FilterBeanDefinitionRegistryPostProcessor}。
  *
