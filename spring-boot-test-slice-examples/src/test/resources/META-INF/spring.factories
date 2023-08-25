@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory=\
+com.vergilyn.examples.slicetest.controller.core.AdditionalExcludeFilterContextCustomizerFactory
