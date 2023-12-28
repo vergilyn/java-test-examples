@@ -62,12 +62,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @WebMvcTest(UserController.class)
 
-// 1: 通过这种方式，可以阻止注册到spring。（会先被扫描注册到 BeanDefinitionRegistry）
+// 1) 通过这种方式，可以阻止注册到spring。（会先被扫描注册到 BeanDefinitionRegistry，再 remove）
 // @Import(UserControllerTest.FilterBeanDefinitionRegistryPostProcessor.class)
 
+// 2)
 @Import(UserOtherControllerTypeExcludeFilter.class)
 
-// 如果存在 `@ComponentScan`，依然会将`UserOtherController`注册到spring中。
+// 3) 由于多个`@ComponentScan`彼此独立，所以其它的`@ComponentScan`依然会将`UserOtherController`注册到spring中。
 // @ComponentScan(basePackages = "com.vergilyn.examples.slicetest.controller",
 //         excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = ExcludeUserOtherControllerTypeFilter.class)})
 class UserControllerTest {

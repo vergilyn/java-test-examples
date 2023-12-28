@@ -11,6 +11,7 @@
         <module>testng-examples</module>
         <module>swagger-examples</module>
         <module>spring-boot-test-examples</module>
+        <module>spring-boot-test-samples</module>
         <module>testng-spring-boot-examples</module>
         <module>junit-examples</module>
         <module>jupiter-examples</module>
